@@ -141,12 +141,52 @@ exports.Prisma.ProductScalarFieldEnum = {
   price_sale: 'price_sale',
   cost_price: 'cost_price',
   stock: 'stock',
-  id_category: 'id_category'
+  id_category: 'id_category',
+  providerId: 'providerId'
 };
 
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name'
+};
+
+exports.Prisma.SaleScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  total: 'total',
+  payment_method: 'payment_method',
+  description: 'description',
+  id_user: 'id_user'
+};
+
+exports.Prisma.SaleDetailScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  subtotal: 'subtotal',
+  id_sale: 'id_sale',
+  id_product: 'id_product'
+};
+
+exports.Prisma.ProviderScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  number: 'number'
+};
+
+exports.Prisma.InvestmentScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  total: 'total',
+  id_provider: 'id_provider',
+  userId: 'userId'
+};
+
+exports.Prisma.InvestmentDetailScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  subtotal: 'subtotal',
+  id_product: 'id_product',
+  id_investment: 'id_investment'
 };
 
 exports.Prisma.SortOrder = {
@@ -169,7 +209,12 @@ exports.Prisma.ModelName = {
   User: 'User',
   Rol: 'Rol',
   Product: 'Product',
-  Category: 'Category'
+  Category: 'Category',
+  Sale: 'Sale',
+  SaleDetail: 'SaleDetail',
+  provider: 'provider',
+  Investment: 'Investment',
+  InvestmentDetail: 'InvestmentDetail'
 };
 
 /**

@@ -4,7 +4,7 @@ import { validateAndConvertId } from "../utils/validate.js";
 // getProductsByCategory
 
 //getProductsByCategory
-export const getProductsByCategory = async (Id) => {
+export const getProductsByCategory = async (id) => {
   const numericId = validateAndConvertId(id);
   try {
     const product = await prisma.product.findMany({

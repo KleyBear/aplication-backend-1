@@ -37,6 +37,7 @@ export const registerUser = async (reqBody) => {
     ) {
       throw createError("EMAIL_IN_USE");
     }
+      console.error('Error en registerUser:', error);
     throw createError("INTERNAL_SERVER_ERROR");
   }
 };
