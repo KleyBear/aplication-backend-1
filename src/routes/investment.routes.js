@@ -6,7 +6,7 @@ import { createInvestment,
     updateInvestment 
 } from "../controllers/investment.controller.js";
 import { verifyToken } from "../middlewares/auth.js";
-import { validate } from "../middlewares/validateInput.js";
+
 
 
 const router = Router();

@@ -2,9 +2,9 @@ import { prisma, Prisma } from "../config/db.js";
 import { createError } from "../utils/errors.js";
 import { validateAndConvertId } from "../utils/validate.js";
 
-export const getAllSale = async () => {
+export const getAllSaleDetail = async () => {
   try {
-    const result = await prisma.sale.findMany({
+    const result = await prisma.SaleDetail.findMany({
       select: {
         id: true,
         date: true,
@@ -20,10 +20,10 @@ export const getAllSale = async () => {
   }
 };
 
-export const getSaleById = async (id) => {
+export const getSaleDetailById = async (id) => {
   const numericId = validateAndConvertId(id);
   try {
-    const sale = await prisma.sale.findUnique({
+    const SaleDetail = await prisma.SaleDetail.findUnique({
       where: { id: numericId },
       select: {
         date: true,
@@ -34,11 +34,11 @@ export const getSaleById = async (id) => {
       },
     });
 
-    if (!sale) {
+    if (!SaleDetail) {
       throw createError("RECORD_NOT_FOUND");
     }
 
-    return sale;
+    return SaleDetail;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&
@@ -51,14 +51,14 @@ export const getSaleById = async (id) => {
   }
 };
 
-export const createSale = async (reqBody) => {
+export const createSaleDetail = async (reqBody) => {
   try {
     const { date, total, payment_method, description, id_user } = reqBody;
 
    const data = {
       date, total, payment_method, description, id_user,
     };
-    const sale = await prisma.sale.create({
+    const SaleDetail = await prisma.SaleDetail.create({
       data,
       select: {
         id: true,
@@ -69,30 +69,30 @@ export const createSale = async (reqBody) => {
         id_user: true,
       },
     });
-    return sale;
+    return SaleDetail;
   } catch (error) {
     console.error(error); 
     throw createError("INTERNAL_SERVER_ERROR");
   }
 };
 
-export const deleteSale = async (id) => {
+export const deleteSaleDetail = async (id) => {
   const numericId = validateAndConvertId(id);
   try {
-    const deleteSale = await prisma.sale.delete({
+    const deleteSaleDetail = await prisma.SaleDetail.delete({
       where: { id: numericId },
     });
-    return deleteSale;
+    return deleteSaleDetail;
   } catch (error) {
     console.error(error); 
     throw createError("INTERNAL_SERVER_ERROR");
   }
 };
 
-export const updateSale = async (id, data) => {
+export const updateSaleDetail = async (id, data) => {
   const numericId = validateAndConvertId(id);
   try {
-    const updateData = await prisma.sale.update({
+    const updateData = await prisma.SaleDetail.update({
       where: { id: numericId},data
     });
 

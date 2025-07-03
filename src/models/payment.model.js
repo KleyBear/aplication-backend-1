@@ -2,16 +2,15 @@ import { prisma, Prisma } from "../config/db.js";
 import { createError } from "../utils/errors.js";
 import { validateAndConvertId } from "../utils/validate.js";
 
-export const getAllSale = async () => {
+export const getAllPayment = async () => {
   try {
-    const result = await prisma.sale.findMany({
+    const result = await prisma.payment.findMany({
       select: {
         id: true,
-        date: true,
-        total: true,
-        payment_method: true,
-        description: true,
-        id_user: true,
+        id_accounts_receivable: true, 
+        amount_paid: true, 
+        payment_date: true, 
+        payment_method: true
       },
     });
     return result;
@@ -20,10 +19,10 @@ export const getAllSale = async () => {
   }
 };
 
-export const getSaleById = async (id) => {
+export const getPaymentById = async (id) => {
   const numericId = validateAndConvertId(id);
   try {
-    const sale = await prisma.sale.findUnique({
+    const Payment = await prisma.Payment.findUnique({
       where: { id: numericId },
       select: {
         date: true,
@@ -34,11 +33,11 @@ export const getSaleById = async (id) => {
       },
     });
 
-    if (!sale) {
+    if (!Payment) {
       throw createError("RECORD_NOT_FOUND");
     }
 
-    return sale;
+    return Payment;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&
@@ -51,14 +50,14 @@ export const getSaleById = async (id) => {
   }
 };
 
-export const createSale = async (reqBody) => {
+export const createPayment = async (reqBody) => {
   try {
-    const { date, total, payment_method, description, id_user } = reqBody;
+    const { date,total,payment_method,description,id_user } = reqBody;
 
-   const data = {
-      date, total, payment_method, description, id_user,
+    const data = {
+      date,total,payment_method, description,id_user,
     };
-    const sale = await prisma.sale.create({
+    const Payment = await prisma.Payment.create({
       data,
       select: {
         id: true,
@@ -69,31 +68,29 @@ export const createSale = async (reqBody) => {
         id_user: true,
       },
     });
-    return sale;
+    return Payment;
   } catch (error) {
-    console.error(error); 
     throw createError("INTERNAL_SERVER_ERROR");
   }
 };
 
-export const deleteSale = async (id) => {
+export const deletePayment = async (id) => {
   const numericId = validateAndConvertId(id);
   try {
-    const deleteSale = await prisma.sale.delete({
+    const deletePayment = await prisma.Payment.delete({
       where: { id: numericId },
     });
-    return deleteSale;
+    return deletePayment;
   } catch (error) {
-    console.error(error); 
     throw createError("INTERNAL_SERVER_ERROR");
   }
 };
 
-export const updateSale = async (id, data) => {
+export const updatePayment = async (id, data) => {
   const numericId = validateAndConvertId(id);
   try {
-    const updateData = await prisma.sale.update({
-      where: { id: numericId},data
+    const updateData = await prisma.Payment.update({
+      where: { id: numericId },data
     });
 
     return updateData;

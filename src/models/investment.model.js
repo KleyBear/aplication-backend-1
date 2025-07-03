@@ -9,9 +9,7 @@ export const getAllInvestment = async () => {
         id: true,
         date: true,
         total: true,
-        payment_method: true,
-        description: true,
-        id_user: true,
+        id_provider: true,
       },
     });
     return result;
@@ -38,7 +36,7 @@ export const getInvestmentById = async (id) => {
       throw createError("RECORD_NOT_FOUND");
     }
 
-    return sale;
+    return investment;
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&

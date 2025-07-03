@@ -7,7 +7,7 @@ import {
   deleteProvider,
 } from "../controllers/provider.controller.js";
 import { verifyToken } from "../middlewares/auth.js";
-import { validate } from "../middlewares/validateInput.js";
+
 
 const router = Router();
 

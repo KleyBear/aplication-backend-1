@@ -6,7 +6,6 @@ import { createSale,
     updateSale 
 } from "../controllers/sale.controller.js";
 import { verifyToken } from "../middlewares/auth.js";
-import { validate } from "../middlewares/validateInput.js";
 
 
 const router = Router();

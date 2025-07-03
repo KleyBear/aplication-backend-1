@@ -33,7 +33,6 @@ export const createUser = async (reqBody) => {
     return user;
   } catch (error) {
     console.error("Error en createUser:", error);
-    // Si el error ya tiene status, es un error personalizado, relánzalo directamente.
     if (error.status) throw error;
     throw createError("INTERNAL_SERVER_ERROR");
   }
@@ -110,9 +109,16 @@ export async function updateUser(id, data) {
   try {
     const numericId = validateAndConvertId(id);
 
+    // Asegurar que si viene id_rol lo actualice correctamente
+    // Retornar el usuario actualizado con rol incluido
     const updatedUser = await prisma.user.update({
       where: { id: numericId },
       data,
+      include: {
+        rol: {
+          select: { name: true },
+        },
+      },
     });
 
     return updatedUser;
